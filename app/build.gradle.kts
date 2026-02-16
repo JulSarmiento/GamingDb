@@ -1,8 +1,18 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.hilt)
   alias(libs.plugins.ksp)
+
+}
+
+val localProperties = Properties()
+val localPropertiesFile: File = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+  localProperties.load(FileInputStream(localPropertiesFile))
 }
 
 android {
@@ -20,6 +30,10 @@ android {
     versionCode = 1
     versionName = "1.0"
 
+    buildConfigField("String", "BASE_URL", localProperties.getProperty("BASE_URL"))
+    buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY"))
+    buildConfigField("String", "ENDPOINT_GAMES", localProperties.getProperty("ENDPOINT_GAMES"))
+
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
@@ -35,7 +49,9 @@ android {
   }
   buildFeatures {
     compose = true
+    buildConfig = true
   }
+
 }
 
 dependencies {
