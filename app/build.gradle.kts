@@ -1,8 +1,19 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.hilt)
   alias(libs.plugins.ksp)
+  kotlin("plugin.serialization") version "2.3.0"
+
+}
+
+val localProperties = Properties()
+val localPropertiesFile: File = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+  localProperties.load(FileInputStream(localPropertiesFile))
 }
 
 android {
@@ -20,6 +31,10 @@ android {
     versionCode = 1
     versionName = "1.0"
 
+    buildConfigField("String", "BASE_URL", localProperties.getProperty("BASE_URL"))
+    buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY"))
+    buildConfigField("String", "ENDPOINT_GAMES", localProperties.getProperty("ENDPOINT_GAMES"))
+
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
@@ -35,7 +50,9 @@ android {
   }
   buildFeatures {
     compose = true
+    buildConfig = true
   }
+
 }
 
 dependencies {
@@ -47,10 +64,13 @@ dependencies {
   implementation(libs.androidx.compose.ui.graphics)
   implementation(libs.androidx.compose.ui.tooling.preview)
   implementation(libs.androidx.compose.material3)
+  implementation(libs.androidx.compose.material3.icons.extended)
 
   // Hilt
   implementation(libs.hilt)
   ksp(libs.hilt.compiler)
+
+  implementation(libs.androidx.room.ktx)
 
   // Navigation
   implementation(libs.androidx.navigation.compose)
@@ -68,6 +88,8 @@ dependencies {
   // Coil
   implementation(libs.coil.compose)
 
+  // Serialization
+  implementation(libs.kotlin.serialization)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
