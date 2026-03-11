@@ -6,6 +6,7 @@ plugins {
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.hilt)
   alias(libs.plugins.ksp)
+  kotlin("plugin.serialization") version "2.3.0"
 
 }
 
@@ -63,6 +64,7 @@ dependencies {
   implementation(libs.androidx.compose.ui.graphics)
   implementation(libs.androidx.compose.ui.tooling.preview)
   implementation(libs.androidx.compose.material3)
+  implementation(libs.androidx.compose.material3.icons.extended)
 
   // Hilt
   implementation(libs.hilt)
@@ -86,6 +88,8 @@ dependencies {
   // Coil
   implementation(libs.coil.compose)
 
+  // Serialization
+  implementation(libs.kotlin.serialization)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
