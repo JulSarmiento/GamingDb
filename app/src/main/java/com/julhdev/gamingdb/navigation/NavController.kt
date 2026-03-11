@@ -8,7 +8,7 @@ import androidx.navigation.toRoute
 import com.julhdev.gamingdb.ui.views.DetailsView
 import com.julhdev.gamingdb.ui.views.HomeView
 import com.julhdev.gamingdb.viewmodels.GamesViewModel
-import com.julhdev.retrofitgames.views.SearchGameView
+import com.julhdev.gamingdb.ui.views.SearchGameView
 
 
 @Composable

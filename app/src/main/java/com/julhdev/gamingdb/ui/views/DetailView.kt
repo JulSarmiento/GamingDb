@@ -36,22 +36,22 @@ import com.julhdev.gamingdb.viewmodels.GamesViewModel
 
 /**
  * Composable que representa la vista de detalles de un juego.
- * @param viewmodel El ViewModel asociado a la vista.
+ * @param viewModel El ViewModel asociado a la vista.
  * @param navController El controlador de navegación de la aplicación.
  * @param gameId El ID del juego para el cual se mostrarán los detalles.
- * @usage DetaillsView(viewmodel, navController, gameId)
+ * @usage DetailsView(viewmodel, navController, gameId)
  */
 @Composable
-fun DetailsView(viewmodel: GamesViewModel, navController: NavController, gameId: Int) {
-  val gameResource by viewmodel.state.collectAsState(initial = Resource.Loading())
+fun DetailsView(viewModel: GamesViewModel, navController: NavController, gameId: Int) {
+  val gameResource by viewModel.state.collectAsState(initial = Resource.Loading())
 
   LaunchedEffect(key1 = gameId) {
-    viewmodel.getGameById(gameId)
+    viewModel.getGameById(gameId)
   }
 
   DisposableEffect(Unit) {
     onDispose {
-      viewmodel.cleanState()
+      viewModel.cleanState()
     }
   }
 

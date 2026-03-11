@@ -1,4 +1,4 @@
-package com.julhdev.retrofitgames.views
+package com.julhdev.gamingdb.ui.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
